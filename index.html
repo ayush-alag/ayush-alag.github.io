@@ -1,90 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ayush Alag</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #fafafa;
-      color: #1a1a1a;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
+import React from 'react';
+import { motion } from 'framer-motion';
 
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+export default function App() {
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-800 p-6">
+      <motion.div
+        className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 grid gap-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <header className="text-center">
+          <h1 className="text-4xl font-semibold mb-2">Ayush Alag</h1>
+          <p className="text-lg text-gray-600">
+            MS CS Student at Stanford | AI & Systems Enthusiast
+          </p>
+        </header>
 
-    h1 {
-      font-size: 2.5em;
-      font-weight: 600;
-      margin-bottom: 0.3em;
-    }
+        <section>
+          <h2 className="text-2xl font-medium border-b pb-1 mb-4">About Me</h2>
+          <p>
+            I'm researching multi-LLM cooperation with{' '}
+            <a href="https://hazyresearch.stanford.edu/" className="text-blue-600 hover:underline">
+              Chris Ré (HazyResearch)
+            </a>{' '}
+            and state abstraction in deep RL. Previously, I built C++ systems at
+            Five Rings Capital and graduated summa cum laude in CS from Princeton.
+          </p>
+        </section>
 
-    h2 {
-      font-size: 1.5em;
-      margin-top: 2em;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.3em;
-    }
+        <section>
+          <h2 className="text-2xl font-medium border-b pb-1 mb-4">Projects</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              <a href="https://github.com/HazyResearch/minions" className="font-semibold text-blue-600 hover:underline">
+                Minions
+              </a>{' '}
+              — distributed LLM protocol framework
+            </li>
+            <li>
+              <a href="https://openreview.net/forum?id=K4m9g6AYcX" className="font-semibold text-blue-600 hover:underline">
+                Is EMA Robust? (NeurIPS 2023)
+              </a>{' '}
+              — auditing deep learning models
+            </li>
+            <li>
+              <a href="https://doi.org/10.1371/journal.pone.0218253" className="font-semibold text-blue-600 hover:underline">
+                Epigenetic ML biomarkers of food allergy
+              </a>{' '}
+              — Regeneron Top‑40 Finalist
+            </li>
+          </ul>
+        </section>
 
-    p, li {
-      font-size: 1.05em;
-    }
+        <section>
+          <h2 className="text-2xl font-medium border-b pb-1 mb-4">Fun!</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              <a href="https://www.youtube.com/watch?v=Lwg25n3y8hQ" className="text-blue-600 hover:underline">
+                Hip hop dance
+              </a>{' '}
+              &{' '}
+              <a href="https://www.youtube.com/watch?v=gHnmC3V2GI0" className="text-blue-600 hover:underline">
+                choreography
+              </a>
+            </li>
+          </ul>
+        </section>
 
-    ul {
-      padding-left: 20px;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      margin-top: 4em;
-      font-size: 0.9em;
-      color: #777;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Ayush Alag</h1>
-    <p>Hi! I'm an MS CS Student at Stanford specializing in AI, working at the intersection of systems and machine learning. I'm interested in scalable LLMs, deep RL, and efficient distributed inference and training.</p>
-
-    <h2>About Me</h2>
-    <p>I'm currently working on multi-LLM cooperation with <a href="https://hazyresearch.stanford.edu/">Chris Ré (HazyResearch)</a> and state abstraction in deep RL. Previously, I worked in C++ systems at Five Rings Capital and graduated summa cum laude from Princeton in CS.</p>
-
-    <h2>Projects</h2>
-    <ul>
-      <li><strong><a href="https://github.com/HazyResearch/minions">Minions</a></strong> — Open-source framework for distributed LLM protocols</li>
-      <li><strong><a href="https://openreview.net/forum?id=K4m9g6AYcX">Is EMA Robust?</a></strong> — NeurIPS 2023 (Senior Thesis Prize), auditing deep learning models</li>
-      <li><strong><a href="https://doi.org/10.1371/journal.pone.0218253">Machine learning approach yields epigenetic biomarkers of food allergy</a></strong> — Regeneron Finalist work in deep learning + epigenetics</li>
-    </ul>
-
-    <h2>Fun!</h2>
-    <ul>
-        <li><a href="https://www.youtube.com/watch?v=Lwg25n3y8hQ">Hip hop dance</a> and <a href="https://www.youtube.com/watch?v=gHnmC3V2GI0">choreography</a> </li>
-    </ul>
-
-    <h2>Contact</h2>
-    <ul>
-      <li>Email: <a href="mailto:aalag@cs.stanford.edu">aalag@cs.stanford.edu</a></li>
-      <li>GitHub: <a href="https://github.com/ayushalag">ayushalag</a></li>
-      <li>LinkedIn: <a href="https://linkedin.com/in/ayushalag">ayushalag</a></li>
-    </ul>
-  </div>
-</body>
-</html>
+        <section>
+          <h2 className="text-2xl font-medium border-b pb-1 mb-4">Contact</h2>
+          <ul className="space-y-1">
+            <li>
+              Email:{' '}
+              <a href="mailto:aalag@cs.stanford.edu" className="text-blue-600 hover:underline">
+                aalag@cs.stanford.edu
+              </a>
+            </li>
+            <li>
+              GitHub:{' '}
+              <a href="https://github.com/ayushalag" className="text-blue-600 hover:underline">
+                github.com/ayushalag
+              </a>
+            </li>
+            <li>
+              LinkedIn:{' '}
+              <a href="https://linkedin.com/in/ayushalag" className="text-blue-600 hover:underline">
+                linkedin.com/in/ayushalag
+              </a>
+            </li>
+          </ul>
+        </section>
+      </motion.div>
+    </div>
+  );
+}
