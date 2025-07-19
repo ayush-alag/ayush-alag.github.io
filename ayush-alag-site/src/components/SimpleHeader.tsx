@@ -3,17 +3,17 @@ import { personalInfo } from '../data/personalInfo';
 
 export const SimpleHeader = () => {
   return (
-    <header className="w-full max-w-6xl mx-auto px-8 py-6">
-      <div className="flex justify-between items-center">
+    <header className="w-full max-w-6xl mx-auto px-8 py-8">
+      <div className="flex justify-between items-center backdrop-blur-sm bg-white/70 dark:bg-gray-900/70 rounded-2xl px-6 py-4 shadow-lg">
         {/* Name and Navigation */}
         <div className="flex items-center space-x-8">
-          <h1 className="text-xl font-medium text-gray-900 dark:text-gray-100">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {personalInfo.name}
           </h1>
           <nav>
             <a 
               href="#home" 
-              className="text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 text-base border-b border-gray-900 dark:border-gray-100 pb-1"
+              className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 text-base font-medium border-b-2 border-gray-900 dark:border-gray-100 pb-1 transition-colors"
             >
               Home
             </a>
@@ -21,30 +21,30 @@ export const SimpleHeader = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-5">
           <a 
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors transform hover:scale-110"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-6 h-6" />
           </a>
           <a 
             href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors transform hover:scale-110"
           >
-            <Linkedin className="w-5 h-5" />
+            <Linkedin className="w-6 h-6" />
           </a>
           <a 
             href="https://twitter.com/ayushalag" 
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors transform hover:scale-110"
           >
-            <Twitter className="w-5 h-5" />
+            <Twitter className="w-6 h-6" />
           </a>
         </div>
       </div>
