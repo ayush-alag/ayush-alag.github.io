@@ -1,3 +1,4 @@
+import React from 'react';
 import { Github, Linkedin, Briefcase, GraduationCap, Lightbulb } from 'lucide-react';
 
 // ============================================================================
@@ -78,25 +79,49 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 function App() {
+  const [activeSection, setActiveSection] = React.useState('about');
+
   const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-sophisticated">
       {/* Navigation Header */}
       <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm border-b border-gray-200 z-50">
         <div className="max-w-6xl mx-auto px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold text-gray-900">{PERSONAL_INFO.name}</h1>
-            <nav className="flex space-x-8">
-              <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            <nav className="flex space-x-10">
+              <button 
+                onClick={() => scrollToSection('about')} 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
+                  activeSection === 'about' 
+                    ? 'text-gray-900 bg-gray-100/50' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
+                }`}
+              >
                 About
               </button>
-              <button onClick={() => scrollToSection('timeline')} className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              <button 
+                onClick={() => scrollToSection('timeline')} 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
+                  activeSection === 'timeline' 
+                    ? 'text-gray-900 bg-gray-100/50' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
+                }`}
+              >
                 Timeline
               </button>
-              <button onClick={() => scrollToSection('writing')} className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+              <button 
+                onClick={() => scrollToSection('writing')} 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
+                  activeSection === 'writing' 
+                    ? 'text-gray-900 bg-gray-100/50' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
+                }`}
+              >
                 Writing
               </button>
             </nav>
