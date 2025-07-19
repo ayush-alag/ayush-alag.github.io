@@ -10,6 +10,9 @@ export interface Experience {
   current?: boolean;
   link?: string;
   icon?: string;
+  color?: 'purple' | 'orange' | 'blue' | 'green' | 'pink';
+  highlights?: string[];
+  year?: string;
 }
 
 export interface PersonalInfo {
