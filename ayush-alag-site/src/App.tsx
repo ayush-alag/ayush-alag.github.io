@@ -206,31 +206,42 @@ function App() {
       <section id="timeline" className="py-16 px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
-          <div className="space-y-10">
+          <div className="space-y-8">
             {Object.entries(TIMELINE_DATA)
               .sort(([a], [b]) => parseInt(b) - parseInt(a))
-              .map(([year, items]) => (
-              <div key={year}>
-                {/* Year Header - Full Width */}
-                <div className="bg-gray-50 rounded-lg px-6 py-2 mb-6">
-                  <h3 className="text-xl font-bold text-gray-900">{year}</h3>
-                </div>
-                
-                {/* Timeline Items */}
-                <div className="space-y-6 px-6">
-                  {items.map((item) => (
-                    <div key={item.id}>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600 leading-relaxed mb-1">
-                        {item.description}
-                      </p>
-                      <div className="text-sm text-gray-500">
-                        {item.date}
-                      </div>
+              .map(([year, items], index) => (
+              <div key={year} className="relative">
+                <div className="flex gap-8">
+                  {/* Year badge with vertical line */}
+                  <div className="flex-shrink-0 relative" style={{ width: '100px' }}>
+                    <div className="bg-gray-50 rounded-lg px-4 py-2 text-center">
+                      <h3 className="text-lg font-bold text-gray-900">{year}</h3>
                     </div>
-                  ))}
+                    {/* Vertical line */}
+                    {index < Object.entries(TIMELINE_DATA).length - 1 && (
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-px bg-gray-200" 
+                           style={{ top: '48px', bottom: '-32px' }}></div>
+                    )}
+                  </div>
+                  
+                  {/* Timeline Items */}
+                  <div className="flex-1 pt-2">
+                    <div className="space-y-6">
+                      {items.map((item) => (
+                        <div key={item.id}>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-gray-600 leading-relaxed mb-1">
+                            {item.description}
+                          </p>
+                          <div className="text-sm text-gray-500">
+                            {item.date}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
