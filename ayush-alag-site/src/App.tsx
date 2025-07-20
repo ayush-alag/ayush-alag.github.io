@@ -217,13 +217,13 @@ function App() {
                 </div>
                 
                 {/* Timeline Items for this year */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {items.map((item) => (
-                    <div key={item.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                      <h4 className="text-lg font-bold text-gray-900 mb-3">
+                    <div key={item.id} className="pb-4 border-b border-gray-100 last:border-b-0">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">
                         {item.title}
                       </h4>
-                      <p className="text-gray-600 leading-relaxed mb-3">
+                      <p className="text-gray-600 leading-relaxed mb-2">
                         {item.description}
                       </p>
                       <div className="text-sm text-gray-500">
