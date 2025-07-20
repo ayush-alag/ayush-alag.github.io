@@ -10,7 +10,7 @@ const PERSONAL_INFO = {
   tagline: "CS Student at Stanford | AI & Systems Researcher",
   description: `I'm researching multi-LLM cooperation and state abstraction in deep reinforcement learning. 
     Previously, I built high-performance C++ systems at Five Rings Capital and graduated summa cum laude from Princeton.`,
-  email: "aalag@cs.stanford.edu",
+  email: "aalag@stanford.edu",
   profilePhoto: "/profile.jpg", // Add your photo to the public folder and update this path
   social: {
     github: "https://github.com/ayushalag",
@@ -70,8 +70,32 @@ const XLogo = ({ className }: { className?: string }) => (
 function App() {
   const [activeSection, setActiveSection] = React.useState('about');
 
+  // Auto-highlight navigation on scroll
+  React.useEffect(() => {
+    const sections = ['about', 'timeline', 'writing'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Section is considered active when 30% visible
+        rootMargin: '-80px 0px -80px 0px' // Account for fixed header
+      }
+    );
+
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -183,7 +207,9 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
           <div className="space-y-12">
-            {Object.entries(TIMELINE_DATA).map(([year, items]) => (
+            {Object.entries(TIMELINE_DATA)
+              .sort(([a], [b]) => parseInt(b) - parseInt(a))
+              .map(([year, items]) => (
               <div key={year}>
                 {/* Year Header */}
                 <div className="bg-gray-100 rounded-lg px-4 py-2 mb-6 inline-block">
@@ -230,7 +256,6 @@ function App() {
       <footer className="py-8 px-8 border-t border-gray-200">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-500">
-            Built with React & Tailwind CSS •{' '}
             <a href={`mailto:${PERSONAL_INFO.email}`} className="hover:text-gray-700 transition-colors">
               {PERSONAL_INFO.email}
             </a>
