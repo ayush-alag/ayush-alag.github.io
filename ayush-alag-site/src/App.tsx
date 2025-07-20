@@ -206,31 +206,37 @@ function App() {
       <section id="timeline" className="py-16 px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
-          <div className="space-y-12">
+          <div className="space-y-8">
             {Object.entries(TIMELINE_DATA)
               .sort(([a], [b]) => parseInt(b) - parseInt(a))
               .map(([year, items]) => (
-              <div key={year}>
-                {/* Year Header */}
-                <div className="bg-gray-100 rounded-lg px-4 py-2 mb-6 inline-block">
-                  <h3 className="text-xl font-bold text-gray-900">{year}</h3>
+              <div key={year} className="flex gap-6">
+                {/* Year Header with vertical line */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-gray-100 rounded-md px-3 py-1 mb-4">
+                    <h3 className="text-lg font-bold text-gray-900">{year}</h3>
+                  </div>
+                  {/* Vertical line */}
+                  <div className="w-px bg-gray-200 flex-1"></div>
                 </div>
                 
                 {/* Timeline Items for this year */}
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={item.id} className="pb-4 border-b border-gray-100 last:border-b-0">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600 leading-relaxed mb-2">
-                        {item.description}
-                      </p>
-                      <div className="text-sm text-gray-500">
-                        {item.date}
+                <div className="flex-1 pb-8">
+                  <div className="space-y-6">
+                    {items.map((item) => (
+                      <div key={item.id}>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-gray-600 leading-relaxed mb-1">
+                          {item.description}
+                        </p>
+                        <div className="text-sm text-gray-500">
+                          {item.date}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
