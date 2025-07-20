@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Briefcase, GraduationCap, Lightbulb } from 'lucide-react';
+import { Github, Linkedin } from 'lucide-react';
 
 // ============================================================================
 // EDIT YOUR CONTENT HERE - Easy to modify!
@@ -19,53 +19,42 @@ const PERSONAL_INFO = {
   }
 };
 
-const TIMELINE_ITEMS = [
-  {
-    id: 1,
-    type: "education",
-    title: "MS Computer Science",
-    organization: "Stanford University",
-    period: "2024 - Present",
-    description: "Researching multi-LLM cooperation and state abstraction in deep reinforcement learning.",
-    icon: GraduationCap
-  },
-  {
-    id: 2,
-    type: "work",
-    title: "Software Engineer",
-    organization: "Five Rings Capital",
-    period: "2023 - 2024",
-    description: "Built high-performance C++ systems for financial trading infrastructure and algorithmic trading platforms.",
-    icon: Briefcase
-  },
-  {
-    id: 3,
-    type: "research",
-    title: "NeurIPS Publication",
-    organization: "Is EMA Robust?",
-    period: "2023",
-    description: "Published research on auditing deep learning models at NeurIPS 2023.",
-    icon: Lightbulb
-  },
-  {
-    id: 4,
-    type: "research",
-    title: "Regeneron Top-40 Finalist",
-    organization: "Epigenetic ML Biomarkers",
-    period: "2023",
-    description: "Machine learning approach to food allergy prediction using epigenetic biomarkers.",
-    icon: Lightbulb
-  },
-  {
-    id: 5,
-    type: "education",
-    title: "BS Computer Science",
-    organization: "Princeton University",
-    period: "2020 - 2024",
-    description: "Graduated summa cum laude with focus on systems programming and algorithms.",
-    icon: GraduationCap
-  }
-];
+const TIMELINE_DATA = {
+  2024: [
+    {
+      id: 1,
+      title: "MS Computer Science @ Stanford",
+      description: "Researching multi-LLM cooperation and state abstraction in deep reinforcement learning.",
+      date: "2024 - Present"
+    },
+    {
+      id: 2,
+      title: "Software Engineer @ Five Rings Capital",
+      description: "Built high-performance C++ systems for financial trading infrastructure and algorithmic trading platforms.",
+      date: "2023 - 2024"
+    }
+  ],
+  2023: [
+    {
+      id: 3,
+      title: "NeurIPS Publication",
+      description: "Published research on auditing deep learning models at NeurIPS 2023. \"Is EMA Robust?\"",
+      date: "2023"
+    },
+    {
+      id: 4,
+      title: "Regeneron Top-40 Finalist",
+      description: "Machine learning approach to food allergy prediction using epigenetic biomarkers.",
+      date: "2023"
+    },
+    {
+      id: 5,
+      title: "BS Computer Science @ Princeton",
+      description: "Graduated summa cum laude with focus on systems programming and algorithms.",
+      date: "2020 - 2024"
+    }
+  ]
+};
 
 // ============================================================================
 // WEBSITE COMPONENTS (You probably don't need to edit below this line)
@@ -126,13 +115,13 @@ function App() {
               </button>
             </nav>
             <div className="flex items-center space-x-4">
-              <a href={PERSONAL_INFO.social.github} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href={PERSONAL_INFO.social.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <Github className="w-5 h-5" />
               </a>
-              <a href={PERSONAL_INFO.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href={PERSONAL_INFO.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href={PERSONAL_INFO.social.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href={PERSONAL_INFO.social.twitter} target="_blank" rel="noopener noreferrer" title="X (Twitter)" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <XLogo className="w-5 h-5" />
               </a>
             </div>
@@ -147,24 +136,29 @@ function App() {
             {/* Profile Photo */}
             <div className="flex-shrink-0">
               <div className="w-64 h-64 rounded-full overflow-hidden shadow-lg bg-gray-200">
-                {PERSONAL_INFO.profilePhoto !== "/profile.jpg" ? (
+                {PERSONAL_INFO.profilePhoto && PERSONAL_INFO.profilePhoto !== "" ? (
                   <img 
                     src={PERSONAL_INFO.profilePhoto} 
                     alt={PERSONAL_INFO.name}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback if image fails to load
+                      e.currentTarget.style.display = 'none';
+                      const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
                   />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">
-                        {PERSONAL_INFO.name.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div className="text-sm">
-                        Add photo to public/profile.jpg
-                      </div>
+                ) : null}
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600" style={{ display: PERSONAL_INFO.profilePhoto ? 'none' : 'flex' }}>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold mb-2">
+                      {PERSONAL_INFO.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="text-sm">
+                      Add photo to public/profile.jpg
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
 
@@ -188,28 +182,32 @@ function App() {
       <section id="timeline" className="py-16 px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
-          <div className="space-y-8">
-            {TIMELINE_ITEMS.map((item) => {
-              const IconComponent = item.icon;
-              return (
-                <div key={item.id} className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-gray-600" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        {item.title} @ {item.organization}
-                      </h3>
-                      <span className="text-sm text-gray-500">{item.period}</span>
-                    </div>
-                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                  </div>
+          <div className="space-y-12">
+            {Object.entries(TIMELINE_DATA).map(([year, items]) => (
+              <div key={year}>
+                {/* Year Header */}
+                <div className="bg-gray-100 rounded-lg px-4 py-2 mb-6 inline-block">
+                  <h3 className="text-xl font-bold text-gray-900">{year}</h3>
                 </div>
-              );
-            })}
+                
+                {/* Timeline Items for this year */}
+                <div className="space-y-6">
+                  {items.map((item) => (
+                    <div key={item.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                      <h4 className="text-lg font-bold text-gray-900 mb-3">
+                        {item.title}
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed mb-3">
+                        {item.description}
+                      </p>
+                      <div className="text-sm text-gray-500">
+                        {item.date}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
