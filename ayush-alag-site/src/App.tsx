@@ -206,23 +206,25 @@ function App() {
       <section id="timeline" className="py-16 px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
-          <div className="space-y-8">
+          <div className="space-y-6">
             {Object.entries(TIMELINE_DATA)
               .sort(([a], [b]) => parseInt(b) - parseInt(a))
               .map(([year, items]) => (
-              <div key={year} className="flex gap-6">
+              <div key={year} className="flex gap-4">
                 {/* Year Header with vertical line */}
-                <div className="flex flex-col items-center">
-                  <div className="bg-gray-100 rounded-md px-3 py-1 mb-4">
-                    <h3 className="text-lg font-bold text-gray-900">{year}</h3>
+                <div className="relative" style={{ minWidth: '80px' }}>
+                  {/* Year badge aligned with first item */}
+                  <div className="bg-gray-100 rounded px-3 py-1 text-sm font-bold text-gray-900 inline-block">
+                    {year}
                   </div>
-                  {/* Vertical line */}
-                  <div className="w-px bg-gray-200 flex-1"></div>
+                  {/* Vertical line starting below badge */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-px bg-gray-200" 
+                       style={{ top: '32px', bottom: '-24px' }}></div>
                 </div>
                 
                 {/* Timeline Items for this year */}
-                <div className="flex-1 pb-8">
-                  <div className="space-y-6">
+                <div className="flex-1 pb-6">
+                  <div className="space-y-5">
                     {items.map((item) => (
                       <div key={item.id}>
                         <h4 className="text-lg font-semibold text-gray-900 mb-1">
