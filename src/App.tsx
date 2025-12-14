@@ -36,9 +36,9 @@ function App() {
       <main className="px-8">
         <section className="max-w-2xl mx-auto py-20">
           <div className="flex flex-col">
-            {/* Photo + icons */}
+            {/* Photo */}
             <div>
-              <div className="w-[140px] h-[160px] rounded-full overflow-hidden bg-gray-200">
+              <div className="w-[140px] h-[140px] rounded-full overflow-hidden bg-gray-200">
                 {PERSONAL_INFO.profilePhoto && PERSONAL_INFO.profilePhoto !== "" ? (
                   <img
                     src={PERSONAL_INFO.profilePhoto}
@@ -60,43 +60,6 @@ function App() {
                     {PERSONAL_INFO.name.split(' ').map((n) => n[0]).join('')}
                   </div>
                 </div>
-              </div>
-
-              <div className="flex items-center space-x-4 mt-[30px] mb-[30px] mx-2.5">
-                <a
-                  href={PERSONAL_INFO.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a
-                  href={PERSONAL_INFO.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={PERSONAL_INFO.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="X"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  <XLogo className="w-5 h-5" />
-                </a>
-                <a
-                  href={`mailto:${PERSONAL_INFO.email}`}
-                  aria-label="Email"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                </a>
               </div>
             </div>
 
@@ -126,6 +89,43 @@ function App() {
               </p>
 
               <div className="pt-2 text-sm text-gray-500">—</div>
+            </div>
+
+            <div className="flex items-center justify-start space-x-4 mt-[30px] mb-[30px] mx-2.5">
+              <a
+                href={PERSONAL_INFO.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href={PERSONAL_INFO.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={PERSONAL_INFO.social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <XLogo className="w-5 h-5" />
+              </a>
+              <a
+                href={`mailto:${PERSONAL_INFO.email}`}
+                aria-label="Email"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </section>
