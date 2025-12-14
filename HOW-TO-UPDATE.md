@@ -3,7 +3,7 @@
 ## 📷 Adding Your Profile Photo
 
 1. **Add your photo to the public folder:**
-   - Place your photo in `ayush-alag-site/public/` folder
+   - Place your photo in `public/` folder
    - Name it `profile.jpg` (or update the filename in App.tsx)
    - Recommended size: 500x500px or larger, square aspect ratio
 
@@ -32,18 +32,22 @@ Update the `TIMELINE_ITEMS` array:
 
 ## 🚀 Deploying Changes
 
+This repo deploys automatically to GitHub Pages on every push to `main`.
+
 After making changes:
 ```bash
-cd ayush-alag-site
+npm install
 npm run build
-cd ..
-cp -r ayush-alag-site/dist/* .
 git add .
 git commit -m "Update content"
 git push
 ```
 
 Wait 2-3 minutes for GitHub Pages to update.
+
+### One-time setup in GitHub
+- In your repo, go to **Settings → Pages**
+- Set **Source** to **GitHub Actions**
 
 ## 🎨 Customizing Design
 

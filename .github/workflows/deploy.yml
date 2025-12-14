@@ -33,6 +33,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify dist output looks correct
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          # ensure we're not uploading the dev index.html
+          ! grep -q 'src="/src/main.tsx"' dist/index.html
+          # for user pages, assets should be rooted at /assets/...
+          grep -Eq '(src|href)="/assets/' dist/index.html
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
