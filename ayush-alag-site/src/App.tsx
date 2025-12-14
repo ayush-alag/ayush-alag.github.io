@@ -1,5 +1,4 @@
-import React from 'react';
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 // ============================================================================
 // EDIT YOUR CONTENT HERE - Easy to modify!
@@ -7,53 +6,17 @@ import { Github, Linkedin } from 'lucide-react';
 
 const PERSONAL_INFO = {
   name: "Ayush Alag",
-  tagline: "CS Student at Stanford | AI & Systems Researcher",
-  description: `I'm researching multi-LLM cooperation and state abstraction in deep reinforcement learning. 
-    Previously, I built high-performance C++ systems at Five Rings Capital and graduated summa cum laude from Princeton.`,
   email: "aalag@stanford.edu",
   profilePhoto: "/profile.jpg", // Add your photo to the public folder and update this path
+  links: {
+    // TODO: replace with the real Allergezy article URL
+    allergezyArticle: "https://www.sfchronicle.com/health/article/Why-is-there-not-something-better-Teen-13525123.php",
+  },
   social: {
     github: "https://github.com/ayushalag",
     linkedin: "https://linkedin.com/in/ayushalag",
-    twitter: "https://x.com/ayushalag" // X/Twitter profile
+    twitter: "https://x.com/Ayushalag1" // X/Twitter profile
   }
-};
-
-const TIMELINE_DATA = {
-  2024: [
-    {
-      id: 1,
-      title: "MS Computer Science @ Stanford",
-      description: "Researching multi-LLM cooperation and state abstraction in deep reinforcement learning.",
-      date: "2024 - Present"
-    },
-    {
-      id: 2,
-      title: "Software Engineer @ Five Rings Capital",
-      description: "Built high-performance C++ systems for financial trading infrastructure and algorithmic trading platforms.",
-      date: "2023 - 2024"
-    }
-  ],
-  2023: [
-    {
-      id: 3,
-      title: "NeurIPS Publication",
-      description: "Published research on auditing deep learning models at NeurIPS 2023. \"Is EMA Robust?\"",
-      date: "2023"
-    },
-    {
-      id: 4,
-      title: "Regeneron Top-40 Finalist",
-      description: "Machine learning approach to food allergy prediction using epigenetic biomarkers.",
-      date: "2023"
-    },
-    {
-      id: 5,
-      title: "BS Computer Science @ Princeton",
-      description: "Graduated summa cum laude with focus on systems programming and algorithms.",
-      date: "2020 - 2024"
-    }
-  ]
 };
 
 // ============================================================================
@@ -68,211 +31,105 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 function App() {
-  const [activeSection, setActiveSection] = React.useState('about');
-
-  // Auto-highlight navigation on scroll
-  React.useEffect(() => {
-    const sections = ['about', 'timeline', 'writing'];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        threshold: 0.3, // Section is considered active when 30% visible
-        rootMargin: '-80px 0px -80px 0px' // Account for fixed header
-      }
-    );
-
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="min-h-screen bg-sophisticated">
-      {/* Navigation Header */}
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm border-b border-gray-200 z-50">
-        <div className="max-w-6xl mx-auto px-8 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold text-gray-900">{PERSONAL_INFO.name}</h1>
-            <nav className="flex space-x-10">
-              <button 
-                onClick={() => scrollToSection('about')} 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
-                  activeSection === 'about' 
-                    ? 'text-gray-900 bg-gray-100/50' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
-                }`}
-              >
-                About
-              </button>
-              <button 
-                onClick={() => scrollToSection('timeline')} 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
-                  activeSection === 'timeline' 
-                    ? 'text-gray-900 bg-gray-100/50' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
-                }`}
-              >
-                Timeline
-              </button>
-              <button 
-                onClick={() => scrollToSection('writing')} 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md ${
-                  activeSection === 'writing' 
-                    ? 'text-gray-900 bg-gray-100/50' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
-                }`}
-              >
-                Writing
-              </button>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <a href={PERSONAL_INFO.social.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href={PERSONAL_INFO.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href={PERSONAL_INFO.social.twitter} target="_blank" rel="noopener noreferrer" title="X (Twitter)" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <XLogo className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* About Section */}
-      <section id="about" className="pt-24 pb-16 px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center space-x-16">
-            {/* Profile Photo */}
-            <div className="flex-shrink-0">
-              <div className="w-64 h-64 rounded-full overflow-hidden shadow-lg bg-gray-200">
+      <main className="px-8">
+        <section className="max-w-2xl mx-auto py-20">
+          <div className="flex flex-col">
+            {/* Photo + icons */}
+            <div>
+              <div className="w-[140px] h-[160px] rounded-full overflow-hidden bg-gray-200">
                 {PERSONAL_INFO.profilePhoto && PERSONAL_INFO.profilePhoto !== "" ? (
-                  <img 
-                    src={PERSONAL_INFO.profilePhoto} 
+                  <img
+                    src={PERSONAL_INFO.profilePhoto}
                     alt={PERSONAL_INFO.name}
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: '50% 70%' }}
                     onError={(e) => {
-                      // Fallback if image fails to load
                       e.currentTarget.style.display = 'none';
                       const fallback = e.currentTarget.nextElementSibling as HTMLElement;
                       if (fallback) fallback.style.display = 'flex';
                     }}
                   />
                 ) : null}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600" style={{ display: PERSONAL_INFO.profilePhoto ? 'none' : 'flex' }}>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold mb-2">
-                      {PERSONAL_INFO.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div className="text-sm">
-                      Add photo to public/profile.jpg
-                    </div>
+                <div
+                  className="w-full h-full flex items-center justify-center text-gray-600"
+                  style={{ display: PERSONAL_INFO.profilePhoto ? 'none' : 'flex' }}
+                >
+                  <div className="text-lg font-bold">
+                    {PERSONAL_INFO.name.split(' ').map((n) => n[0]).join('')}
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* About Content */}
-            <div className="flex-1 max-w-2xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Hello, I'm {PERSONAL_INFO.name.split(' ')[0]}!
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">{PERSONAL_INFO.tagline}</p>
-              <div className="text-gray-700 leading-relaxed space-y-4">
-                {PERSONAL_INFO.description.split('\n').map((paragraph, index) => (
-                  <p key={index}>{paragraph.trim()}</p>
-                ))}
+              <div className="flex items-center space-x-4 mt-[30px] mb-[30px] mx-2.5">
+                <a
+                  href={PERSONAL_INFO.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <XLogo className="w-5 h-5" />
+                </a>
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  aria-label="Email"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Mail className="w-5 h-5" />
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Timeline Section */}
-      <section id="timeline" className="py-16 px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Timeline</h2>
-          <div className="space-y-8">
-            {Object.entries(TIMELINE_DATA)
-              .sort(([a], [b]) => parseInt(b) - parseInt(a))
-              .map(([year, items], index) => (
-              <div key={year} className="relative">
-                <div className="flex gap-8">
-                  {/* Year badge with vertical line */}
-                  <div className="flex-shrink-0 relative" style={{ width: '100px' }}>
-                    <div className="bg-gray-50 rounded-lg px-4 py-2 text-center">
-                      <h3 className="text-lg font-bold text-gray-900">{year}</h3>
-                    </div>
-                    {/* Vertical line */}
-                    {index < Object.entries(TIMELINE_DATA).length - 1 && (
-                      <div className="absolute left-1/2 transform -translate-x-1/2 w-px bg-gray-200" 
-                           style={{ top: '48px', bottom: '-32px' }}></div>
-                    )}
-                  </div>
-                  
-                  {/* Timeline Items */}
-                  <div className="flex-1 pt-2">
-                    <div className="space-y-6">
-                      {items.map((item) => (
-                        <div key={item.id}>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                            {item.title}
-                          </h4>
-                          <p className="text-gray-600 leading-relaxed mb-1">
-                            {item.description}
-                          </p>
-                          <div className="text-sm text-gray-500">
-                            {item.date}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {/* Copy */}
+            <div className="mt-5 mb-5 h-fit text-gray-800 leading-relaxed space-y-6">
+              <h1 className="text-[25px] font-bold text-gray-900">Hi, I'm Ayush.</h1>
 
-      {/* Writing Section */}
-      <section id="writing" className="py-16 px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Writing</h2>
-          <div className="bg-gray-50 rounded-xl p-12">
-            <div className="text-6xl mb-4">✍️</div>
-            <h3 className="text-xl font-medium text-gray-700 mb-2">Coming Soon...</h3>
-            <p className="text-gray-500">
-              I'm working on some interesting posts about AI research, systems programming, and more.
-            </p>
-          </div>
-        </div>
-      </section>
+              <p className="text-[16px] text-gray-700">
+                I'm currently studying parallel computing and model finetuning at Stanford, and spent the summer working on compound agents at Mithril. In a not-so-distant past, I was a developer at Five Rings working on trading signals and enjoyed trying every Indian restaurant in NYC. At Princeton, I spent 50% of my time taking graduate AI classes and 50% on three dance teams. I peaked in high school by developing the first genomic test for allergies and starting a{" "}
+                <a
+                  href={PERSONAL_INFO.links.allergezyArticle}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 hover:underline hover:underline-offset-2"
+                >
+                  company
+                </a>
+                .
+              </p>
 
-      {/* Footer */}
-      <footer className="py-8 px-8 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-gray-500">
-            <a href={`mailto:${PERSONAL_INFO.email}`} className="hover:text-gray-700 transition-colors">
-              {PERSONAL_INFO.email}
-            </a>
-          </p>
-        </div>
-      </footer>
+              <p className="text-[16px] text-gray-700">
+                I enjoy thinking in systems and incentives, and am broadly interested in algorithmic design, societal development, and the intersection of technology and human behavior. In my free time, I enjoy writing and philosophizing.
+              </p>
+
+              <p className="text-[16px] text-gray-700">
+                I also angel invest in a handful of startups, and am always excited to chat with founders.
+              </p>
+
+              <div className="pt-2 text-sm text-gray-500">—</div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
